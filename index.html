@@ -148,42 +148,41 @@ function calc(){
  const landingDateEl=document.getElementById("landingDate");
  const landingTimeEl=document.getElementById("landingTime");
 
- if(landingDateEl.value){
-   const target=new Date(landingDateEl.value+"T"+(landingTimeEl.value||"00:00")+":00");
-   desired.textContent=fmt(target);
+   if(landingDateEl.value){
+      const target=new Date(landingDateEl.value+"T"+(landingTimeEl.value||"00:00")+":00");
+      desired.textContent=fmt(target);
 
-   const requiredStart=new Date(target.getTime()-durationMs);
-   required.textContent=fmt(requiredStart);
+      const requiredStart=new Date(target.getTime()-durationMs);
+      required.textContent=fmt(requiredStart);
 
-   const diff=requiredStart-now;
+      const diff=requiredStart-now;
 
+      if(diff <= 0){
 
-   if(diff <= 0){
+         until.textContent = "0d 0h 0m 0s";
 
-  until.textContent = "0d 0h 0m 0s";
+         status.textContent = "🟢 START NOW";
 
-  status.textContent = "🟢 START NOW";
+         status.style.background = "#22C55E";
 
-  status.style.background = "#22C55E";
+         status.style.color = "#04150A";
 
-  status.style.color = "#04150A";
+      } else {
 
-} else {
+         const s = Math.floor(diff/1000);
 
-  const s = Math.floor(diff/1000);
+         until.textContent =
+         `${Math.floor(s/86400)}d ${Math.floor((s%86400)/3600)}h ${Math.floor((s%3600)/60)}m ${s%60}s`;
 
-  until.textContent =
-    `${Math.floor(s/86400)}d ${Math.floor((s%86400)/3600)}h ${Math.floor((s%3600)/60)}m ${s%60}s`;
+         status.textContent = "WAIT TO START";
 
-  status.textContent = "WAIT TO START";
+         status.style.background = "#38BDF8";
 
-  status.style.background = "#38BDF8";
+         status.style.color = "#00111F";
 
-  status.style.color = "#00111F";
-
-  }
+      }
+   }
 }
-
 document.addEventListener("DOMContentLoaded",function(){
  document.querySelectorAll("input").forEach(el=>el.addEventListener("input",calc));
  document.getElementById("todayBtn").addEventListener("click",setToday);
