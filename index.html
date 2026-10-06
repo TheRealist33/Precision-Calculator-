@@ -159,35 +159,27 @@ function calc(){
 
    if(diff<=10000){
 
-if(diff<=0){
+   if(diff>0){
 
-   until.textContent="0d 0h 0m 0s";
+      until.textContent=Math.floor(diff/1000)+"s";
 
-   status.textContent="START";
+   } else {
+
+      until.textContent="0d 0h 0m 0s";
+
+   }
+
+   status.textContent="🟢 START NOW";
 
    status.style.background="#22C55E";
 
    status.style.color="#04150A";
-
-   status.style.borderRadius="999px";
-
-   status.style.fontWeight="bold";
-
-} else {
-
-   const s=Math.floor(diff/1000);
-
-   until.textContent=
-
-   `${Math.floor(s/86400)}d ${Math.floor((s%86400)/3600)}h ${Math.floor((s%3600)/60)}m ${s%60}s`;
-
-   status.textContent="WAIT TO START";
-
-   status.style.background="#38BDF8";
-
-   status.style.color="#00111F";
-
-   status.style.borderRadius="12px";
+   } else {
+      const s=Math.floor(diff/1000);
+      until.textContent=`${Math.floor(s/86400)}d ${Math.floor((s%86400)/3600)}h ${Math.floor((s%3600)/60)}m ${s%60}s`;
+      status.textContent="WAIT TO START";
+      status.style.background="#38BDF8";
+      status.style.color="#00111F";
    }
  }
 }
