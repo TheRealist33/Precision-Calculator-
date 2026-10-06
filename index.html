@@ -157,31 +157,31 @@ function calc(){
 
    const diff=requiredStart-now;
 
-   if(diff<=0){
 
-   if(diff>0){
+   if(diff <= 0){
 
-      until.textContent=Math.floor(diff/1000)+"s";
+  until.textContent = "0d 0h 0m 0s";
 
-   } else {
+  status.textContent = "🟢 START NOW";
 
-      until.textContent="0d 0h 0m 0s";
+  status.style.background = "#22C55E";
 
-   }
+  status.style.color = "#04150A";
 
-   status.textContent="🟢 START NOW";
+} else {
 
-   status.style.background="#22C55E";
+  const s = Math.floor(diff/1000);
 
-   status.style.color="#04150A";
-   } else {
-      const s=Math.floor(diff/1000);
-      until.textContent=`${Math.floor(s/86400)}d ${Math.floor((s%86400)/3600)}h ${Math.floor((s%3600)/60)}m ${s%60}s`;
-      status.textContent="WAIT TO START";
-      status.style.background="#38BDF8";
-      status.style.color="#00111F";
-   }
- }
+  until.textContent =
+    `${Math.floor(s/86400)}d ${Math.floor((s%86400)/3600)}h ${Math.floor((s%3600)/60)}m ${s%60}s`;
+
+  status.textContent = "WAIT TO START";
+
+  status.style.background = "#38BDF8";
+
+  status.style.color = "#00111F";
+
+  }
 }
 
 document.addEventListener("DOMContentLoaded",function(){
